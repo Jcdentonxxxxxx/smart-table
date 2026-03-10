@@ -37,7 +37,7 @@ export function initTable(settings, onAction) {
 
     root.container.addEventListener('submit', function(e) {
         e.preventDefault();
-        onAction(onAction(e.submitter));
+        onAction(e.submitter);
     });
 
     const render = (data) => {
