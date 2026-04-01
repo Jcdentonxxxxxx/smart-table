@@ -1,4 +1,4 @@
-import {sortMap} from "../lib/sort.js";
+import { sortMap } from '../lib/sort.js';
 
 export function initSorting(columns) {
     return (query, state, action) => {
@@ -9,13 +9,13 @@ export function initSorting(columns) {
             action.dataset.value = sortMap[action.dataset.value];
             field = action.dataset.field;
             order = action.dataset.value;
-            columns.forEach(column => {
+            columns.forEach((column) => {
                 if (column.dataset.field !== action.dataset.field) {
                     column.dataset.value = 'none';
                 }
             });
         } else {
-            columns.forEach(column => {
+            columns.forEach((column) => {
                 if (column.dataset.value !== 'none') {
                     field = column.dataset.field;
                     order = column.dataset.value;
@@ -23,8 +23,8 @@ export function initSorting(columns) {
             });
         }
 
-        const sort = (field && order !== 'none') ? `${field}:${order}` : null;
+        const sort = field && order !== 'none' ? `${field}:${order}` : null;
 
         return sort ? Object.assign({}, query, { sort }) : query;
-    }
+    };
 }

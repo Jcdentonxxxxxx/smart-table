@@ -5,10 +5,17 @@ export const initPagination = ({pages, fromRow, toRow, totalRows}, createPage) =
     pages.firstElementChild.remove();
 
     let pageCount;
+    let lastLimit;
 
     const applyPagination = (query, state, action) => {
         const limit = state.rowsPerPage;
-        let page = state.page;
+        let page;
+        if (limit !== lastLimit) {
+            page = 1;
+            lastLimit = limit;
+        } else {
+            page = state.page;
+        }
 
         if (action) switch(action.name) {
             case 'prev': page = Math.max(1, page - 1); break;

@@ -8,25 +8,26 @@ export function initData() {
     let lastQuery;
 
     // функция для приведения строк в тот вид, который нужен нашей таблице
-    const mapRecords = (data) => data.map(item => ({
-        id: item.receipt_id,
-        date: item.date,
-        seller: sellers[item.seller_id],
-        customer: customers[item.customer_id],
-        total: item.total_amount
-    }));
+    const mapRecords = (data) =>
+        data.map((item) => ({
+            id: item.receipt_id,
+            date: item.date,
+            seller: sellers[item.seller_id],
+            customer: customers[item.customer_id],
+            total: item.total_amount
+        }));
 
     // функция получения индексов
     const getIndexes = async () => {
         if (!sellers || !customers) {
             [sellers, customers] = await Promise.all([
-                fetch(`${BASE_URL}/sellers`).then(res => res.json()),
-                fetch(`${BASE_URL}/customers`).then(res => res.json()),
+                fetch(`${BASE_URL}/sellers`).then((res) => res.json()),
+                fetch(`${BASE_URL}/customers`).then((res) => res.json())
             ]);
         }
 
         return { sellers, customers };
-    }
+    };
 
     // функция получения записей о продажах с сервера
     const getRecords = async (query, isUpdated = false) => {

@@ -1,15 +1,15 @@
-import './fonts/ys-display/fonts.css'
-import './style.css'
+import './fonts/ys-display/fonts.css';
+import './style.css';
 
-import {initData} from "./data.js";
-import {processFormData} from "./lib/utils.js";
+import { initData } from './data.js';
+import { processFormData } from './lib/utils.js';
 
-import {initTable} from "./components/table.js";
+import { initTable } from './components/table.js';
 
-import {initPagination} from "./components/pagination.js";
-import {initSorting} from "./components/sorting.js";
-import {initFiltering} from "./components/filtering.js";
-import {initSearching} from "./components/searching.js";
+import { initPagination } from './components/pagination.js';
+import { initSorting } from './components/sorting.js';
+import { initFiltering } from './components/filtering.js';
+import { initSearching } from './components/searching.js';
 
 const api = initData();
 
@@ -48,18 +48,23 @@ async function render(action) {
     sampleTable.render(items);
 }
 
-const sampleTable = initTable({
-    tableTemplate: 'table',
-    rowTemplate: 'row',
-    before: ['search', 'header', 'filter'],
-    after: ['pagination']
-}, render);
+const sampleTable = initTable(
+    {
+        tableTemplate: 'table',
+        rowTemplate: 'row',
+        before: ['search', 'header', 'filter'],
+        after: ['pagination']
+    },
+    render
+);
 
 const applySearching = initSearching('search');
 
-const {applyFiltering, updateIndexes} = initFiltering(sampleTable.filter.elements);
+const { applyFiltering, updateIndexes } = initFiltering(
+    sampleTable.filter.elements
+);
 
-const {applyPagination, updatePagination} = initPagination(
+const { applyPagination, updatePagination } = initPagination(
     sampleTable.pagination.elements,
     (el, page, isCurrent) => {
         const input = el.querySelector('input');
